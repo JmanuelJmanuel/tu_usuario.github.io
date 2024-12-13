@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KINEMATIC VECTOR</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h2>Graficador de Vectores</h2>
+
+    <!-- Menú para seleccionar la operación -->
+    <label for="operation">Seleccione la operación:</label>
+    <select id="operation" onchange="updateForm()">
+        <option value="graphVector">Graficar un Vector</option>
+        <option value="addVectors">Suma de Dos Vectores</option>
+        <option value="subtractVectors">Resta de Dos Vectores</option>
+        <option value="scalarMultiplication">Multiplicación por Escalar</option>
+    </select><br><br>
+
+    <!-- Sección de inputs -->
+    <div id="inputs">
+        <!-- Aquí se mostrarán los campos de entrada según la operación seleccionada -->
+    </div>
+
+    <!-- Botón para graficar -->
+   <button id="plotButton" onclick="performOperation()" style="color: white; background-color: #4CAF50;">Graficar</button>
+
+    <div id="plot"></div>
+
+    <script>
+        function updateForm() {
+            let operation = document.getElementById('operation').value;
+            let inputsDiv = document.getElementById('inputs');
+            inputsDiv.innerHTML = ''; // Limpiar inputs anteriores
+
+            if (operation === 'graphVector') {
+                inputsDiv.innerHTML += '<label for="xValue">Ingrese valor de X:</label>';
+                inputsDiv.innerHTML += '<input type="number" id="xValue" value="0"><br><br>';
+                inputsDiv.innerHTML += '<label for="yValue">Ingrese valor de Y:</label>';
+                inputsDiv.innerHTML += '<input type="number" id="yValue" value="0"><br><br>';
+            } else if (operation === 'addVectors' || operation === 'subtractVectors') {
+                inputsDiv.innerHTML += '<label for="x1Value">Ingrese valor de X1:</label>';
+                inputsDiv.innerHTML += '<input type="number" id="x1Value" value="0"><br><br>';
+                inputsDiv.innerHTML += '<label for="y1Value">Ingrese valor de Y1:</label>';
+                inputsDiv.innerHTML += '<input type="number" id="y1Value" value="0"><br><br>';
+                inputsDiv.innerHTML += '<label for="x2Value">Ingrese valor de X2:</label>';
+                inputsDiv.innerHTML += '<input type="number" id="x2Value" value="0"><br><br>';
+                inputsDiv.innerHTML += '<label for="y2Value">Ingrese valor de Y2:</label>';
+                inputsDiv.innerHTML += '<input type="number" id="y2Value" value="0"><br><br>';
+            } else if (operation === 'scalarMultiplication') {
+                inputsDiv.innerHTML += '<label for="x1Value">Ingrese valor de X:</label>';
+                inputsDiv.innerHTML += '<input type="number" id="x1Value" value="0"><br><br>';
+                inputsDiv.innerHTML += '<label for="y1Value">Ingrese valor de Y:</label>';
+                inputsDiv.innerHTML += '<input type="number" id="y1Value" value="0"><br><br>';
+                inputsDiv.innerHTML += '<label for="scalarValue">Ingrese valor del Escalar:</label>';
+                inputsDiv.innerHTML += '<input type="number" id="scalarValue" value="1"><br><br>';
+            }
+        }
+
+        // Inicializar el formulario
+        window.onload = function() {
+            updateForm();
+        };
+
+        function performOperation() {
+            let operation = document.getElementById('operation').value;
+            if (operation === 'graphVector') {
+                plotSingleVector();
+            } else if (operation === 'addVectors') {
+                plotAddition();
+            } else if (operation === 'subtractVectors') {
+                plotSubtraction();
+            } else if (operation === 'scalarMultiplication') {
+                plotScalarMultiplication();
+            }
+        }
+
+        function plotSingleVector() {
+            // Limpiar el gráfico anterior
+            Plotly.purge('plot');
+
+            // Obtener los valores de X y Y
+            let x = parseFloat(document.getElementById('xValue').value);
+            let y = parseFloat(document.getElementById('yValue').value);
+
+            // Vector (x, y)
+            let vector = {
+                type: 'scatter',
+                mode: 'lines+markers',
+                x: [0, x],
+                y: [0, y],
+                name: 'Vector (x, y)',
+                line: {color: 'blue'}
+            };
+
+            // Layout del gráfico
+            let layout = {
+                title: 'Gráfico de Vector',
+                xaxis: {range: [-10, 10], title: 'Eje X'},
+                yaxis: {range: [-10, 10], title: 'Eje Y'},
+                showlegend: true
+            };
+
+            // Dibujar el vector
+            Plotly.newPlot('plot', [vector], layout);
+        }
+
+        function plotAddition() {
+            // Obtener los valores de los vectores
+            let x1 = parseFloat(document.getElementById('x1Value').value);
+            let y1 = parseFloat(document.getElementById('y1Value').value);
+            let x2 = parseFloat(document.getElementById('x2Value').value);
+            let y2 = parseFloat(document.getElementById('y2Value').value);
+
+            // Calcular la suma
+            let xSum = x1 + x2;
+            let ySum = y1 + y2;
+
+            // Limpiar el gráfico anterior
+            Plotly.purge('plot');
+
+            // Vector A desde el origen
+            let vectorA = {
+                type: 'scatter',
+                mode: 'lines+markers',
+                x: [0, x1],
+                y: [0, y1],
+                name: 'Vector A',
+                line: {color: 'blue'}
+            };
+
+            // Vector B desde el origen
+            let vectorB = {
+                type: 'scatter',
+                mode: 'lines+markers',
+                x: [0, x2],
+                y: [0, y2],
+                name: 'Vector B',
+                line: {color: 'red'}
+            };
+
+            // Vectores desplazados para formar el paralelogramo (líneas punteadas)
+            let parallelogramLine1 = {
+                type: 'scatter',
+                mode: 'lines',
+                x: [x1, x1 + x2],
+                y: [y1, y1 + y2],
+                showlegend: false,
+                line: {
+                    color: 'black',
+                    dash: 'dash'
+                }
+            };
+
+            let parallelogramLine2 = {
+                type: 'scatter',
+                mode: 'lines',
+                x: [x2, x1 + x2],
+                y: [y2, y1 + y2],
+                showlegend: false,
+                line: {
+                    color: 'black',
+                    dash: 'dash'
+                }
+            };
+
+            // Vector resultante (A + B)
+            let vectorSum = {
+                type: 'scatter',
+                mode: 'lines+markers',
+                x: [0, xSum],
+                y: [0, ySum],
+                name: 'Vector A + B',
+                line: {color: 'green'}
+            };
+
+            // Layout del gráfico
+            let layout = {
+                title: 'Suma de Vectores (Método del Paralelogramo)',
+                xaxis: {range: [-20, 20], title: 'Eje X'},
+                yaxis: {range: [-20, 20], title: 'Eje Y'},
+                showlegend: true
+            };
+
+            // Dibujar los vectores y el paralelogramo
+            Plotly.newPlot('plot', [vectorA, vectorB, parallelogramLine1, parallelogramLine2, vectorSum], layout);
+        }
+
+        function plotSubtraction() {
+            // Obtener los valores de los vectores
+            let x1 = parseFloat(document.getElementById('x1Value').value);
+            let y1 = parseFloat(document.getElementById('y1Value').value);
+            let x2 = parseFloat(document.getElementById('x2Value').value);
+            let y2 = parseFloat(document.getElementById('y2Value').value);
+
+            // Calcular la resta
+            let xDiff = x1 - x2;
+            let yDiff = y1 - y2;
+
+            // Limpiar el gráfico anterior
+            Plotly.purge('plot');
+
+            // Vector A desde el origen
+            let vectorA = {
+                type: 'scatter',
+                mode: 'lines+markers',
+                x: [0, x1],
+                y: [0, y1],
+                name: 'Vector A',
+                line: {color: 'blue'}
+            };
+
+            // Vector -B desde el origen
+            let vectorNegB = {
+                type: 'scatter',
+                mode: 'lines+markers',
+                x: [0, -x2],
+                y: [0, -y2],
+                name: 'Vector -B',
+                line: {color: 'red'}
+            };
+
+            // Vectores desplazados para formar el paralelogramo (líneas punteadas)
+            let parallelogramLine1 = {
+                type: 'scatter',
+                mode: 'lines',
+                x: [x1, x1 - x2],
+                y: [y1, y1 - y2],
+                showlegend: false,
+                line: {
+                    color: 'black',
+                    dash: 'dash'
+                }
+            };
+
+            let parallelogramLine2 = {
+                type: 'scatter',
+                mode: 'lines',
+                x: [-x2, x1 - x2],
+                y: [-y2, y1 - y2],
+                showlegend: false,
+                line: {
+                    color: 'black',
+                    dash: 'dash'
+                }
+            };
+
+            // Vector resultante (A - B)
+            let vectorDiff = {
+                type: 'scatter',
+                mode: 'lines+markers',
+                x: [0, xDiff],
+                y: [0, yDiff],
+                name: 'Vector A - B',
+                line: {color: 'green'}
+            };
+
+            // Layout del gráfico
+            let layout = {
+                title: 'Resta de Vectores (Método del Paralelogramo)',
+                xaxis: {range: [-20, 20], title: 'Eje X'},
+                yaxis: {range: [-20, 20], title: 'Eje Y'},
+                showlegend: true
+            };
+
+            // Dibujar los vectores y el paralelogramo
+            Plotly.newPlot('plot', [vectorA, vectorNegB, parallelogramLine1, parallelogramLine2, vectorDiff], layout);
+        }
+
+        function plotScalarMultiplication() {
+            // Obtener los valores del vector y el escalar
+            let x1 = parseFloat(document.getElementById('x1Value').value);
+            let y1 = parseFloat(document.getElementById('y1Value').value);
+            let scalar = parseFloat(document.getElementById('scalarValue').value);
+
+            // Calcular la multiplicación por escalar
+            let xScaled = x1 * scalar;
+            let yScaled = y1 * scalar;
+
+            // Limpiar el gráfico anterior
+            Plotly.purge('plot');
+
+            // Vector Original
+            let vectorOriginal = {
+                type: 'scatter',
+                mode: 'lines+markers',
+                x: [0, x1],
+                y: [0, y1],
+                name: 'Vector Original',
+                line: {color: 'blue'}
+            };
+
+            // Vector Escalado
+            let vectorScaled = {
+                type: 'scatter',
+                mode: 'lines+markers',
+                x: [0, xScaled],
+                y: [0, yScaled],
+                name: 'Vector Escalado',
+                line: {color: 'green'}
+            };
+
+            // Layout del gráfico
+            let layout = {
+                title: 'Multiplicación por Escalar',
+                xaxis: {range: [-20, 20], title: 'Eje X'},
+                yaxis: {range: [-20, 20], title: 'Eje Y'},
+                showlegend: true
+            };
+
+            // Dibujar los vectores secuencialmente
+            Plotly.newPlot('plot', [vectorOriginal, vectorScaled], layout);
+        }
+
+    </script>
+<style>
+    #timerDisplay {
+        font-size: 3em;
+        margin: 20px 0;
+    }
+    button {
+        padding: 10px 20px;
+        margin: 5px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        color: white;
+    }
+    .start {
+        background-color: green;
+    }
+    .stop {
+        background-color: red;
+    }
+    .reset {
+        background-color: blue;
+    }
+</style>
+<div id="timerDisplay">00:00.000</div>
+<button class="start" onclick="startTimer()">Start</button>
+<button class="stop" onclick="stopTimer()">Stop</button>
+<button class="reset" onclick="resetTimer()">Reset</button>
+<script>
+    let timerInterval; // Almacena el intervalo del temporizador
+    let startTime; // Tiempo inicial
+    let elapsedTime = 0; // Tiempo transcurrido
+
+    // Iniciar el temporizador
+    function startTimer() {
+        if (timerInterval) return; // Evita iniciar múltiples temporizadores
+        startTime = Date.now() - elapsedTime; // Ajusta el inicio según tiempo transcurrido
+        timerInterval = setInterval(() => {
+            elapsedTime = Date.now() - startTime;
+            displayTime(elapsedTime);
+        }, 10); // Actualiza cada 10ms
+    }
+
+    // Detener el temporizador
+    function stopTimer() {
+        clearInterval(timerInterval);
+        timerInterval = null; // Limpia el intervalo
+    }
+
+    // Reiniciar el temporizador
+    function resetTimer() {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        elapsedTime = 0;
+        displayTime(0);
+    }
+
+    // Mostrar tiempo en formato 00:00.000
+    function displayTime(milliseconds) {
+        let minutes = Math.floor(milliseconds / 60000);
+        let seconds = Math.floor((milliseconds % 60000) / 1000);
+        let ms = milliseconds % 1000;
+
+        document.getElementById('timerDisplay').textContent =
+            `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(ms).padStart(3, '0')}`;
+    }
+</script>
+
+</body>
+</html>
