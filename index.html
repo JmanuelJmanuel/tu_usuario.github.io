@@ -2,123 +2,146 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>KINEMATIC VECTOR</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f5;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #003366;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        section {
-            padding: 20px;
-            margin: 20px;
-        }
-        .block {
-            background-color: #ffffff;
-            border: 1px solid #cccccc;
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        h1, h2, h3 {
-            color: #003366;
-        }
-        ul {
-            list-style-type: square;
-        }
-        .link-section {
-            text-align: center;
-            margin-top: 30px;
-        }
-        .link-section a {
-            text-decoration: none;
-            color: #ffffff;
-            background-color: #003366;
-            padding: 10px 20px;
-            border-radius: 5px;
-        }
-        .note {
-            font-size: 0.9em;
-            color: #555555;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario - Sistema Interactivo para Vectores</title>
 </head>
 <body>
+    <header>
+        <h1>Manual de Usuario del Sistema Interactivo para el Aprendizaje de Vectores</h1>
+    </header>
 
-<header>
-    <h1>KINEMATIC VECTOR</h1>
-</header>
+    <section id="introduccion">
+        <h2>Introducción</h2>
+        <p>El sistema interactivo desarrollado permite a los estudiantes aprender conceptos y operaciones vectoriales mediante el uso de un robot graficador y una interfaz interactiva. Este manual está diseñado para guiar al usuario en la configuración, operación y mantenimiento del sistema.</p>
+    </section>
 
-<section>
-    <div class="block">
-        <h2>INFORMACIÓN DEL FOLLETO</h2>
-
-        <h3>Información General</h3>
-        <p>
-            Kinematic Vector es una herramienta y sistema interactivo e innovador diseñado para ayudar a los estudiantes de décimo y once grado a comprender conceptos fundamentales de vectores en el contexto de la física y matemáticas. Este proyecto busca lograr un cambio positivo en la forma en que los estudiantes perciben estas áreas del conocimiento, transformando conceptos abstractos en experiencias prácticas y visuales, facilitando el aprendizaje activo a través de la tecnología.
-        </p>
-    </div>
-
-    <div class="block">
-        <h3>Contenido del Prototipo</h3>
+    <section id="componentes">
+        <h2>Componentes del Sistema</h2>
         <ul>
-            <li>Microcontrolador: Arduino ESP32 para controlar el carro y recibir entradas del usuario.</li>
-            <li>Motores: Motores paso a paso para un control preciso del movimiento.</li>
-            <li>Puente H</li>
-            <li>Sensores: Encoders para monitorear la posición del carro y asegurar el desplazamiento exacto.</li>
-            <li>Baterías recargables</li>
-            <li>Regulador</li>
-            <li>Estructura 3D</li>
-            <li>Interfaz Gráfica: Software desarrollado en lenguajes como Python o Scratch que permitirá la interacción del estudiante con el carro.</li>
+            <li><strong>Robot Graficador (KINEMATIC):</strong>
+                <ul>
+                    <li>Microcontrolador ESP32.</li>
+                    <li>Motores N20 con ruedas.</li>
+                    <li>Baterías recargables Li-ion.</li>
+                    <li>Estructura de soporte impresa en 3D.</li>
+                    <li>Sensores integrados para movimiento y ángulos.</li>
+                </ul>
+            </li>
+            <li><strong>Interfaz Interactiva:</strong>
+                <ul>
+                    <li>Software basado en navegador.</li>
+                    <li>Gráficos interactivos para representar vectores.</li>
+                    <li>Opciones para ingresar valores de vectores y realizar operaciones.</li>
+                </ul>
+            </li>
+            <li><strong>Accesorios Complementarios:</strong>
+                <ul>
+                    <li>Cable USB para cargar las baterías.</li>
+                    <li>Manual impreso de referencia rápida.</li>
+                </ul>
+            </li>
         </ul>
-    </div>
+    </section>
 
-    <div class="block">
-        <h3>Características Principales</h3>
-        <p>
-            Utiliza un microcontrolador ESP32 driver Arduino para gestionar todos los componentes del carro y recibir instrucciones de movimiento. Equipado con 4 MICRO MOTORES N20 3-6V (0.5kg) que permiten un control preciso del movimiento en los ejes X e Y, un driver L9110 que es un componente esencial en el diseño del Kinematic Vector ya que proporciona el control necesario sobre los motores, lo cual es esencial para representar vectores con exactitud. Integración de encoders KY-040 rotatorios que monitorean la posición y el desplazamiento del carro, asegurando que pueda seguir rutas predeterminadas con precisión. Alimentados por dos Pilas Batería Li-ion Recargable 18650 3.7V 6000mAh ajustado a un Tp4056 Módulo Cargador Batería Litio 18650 Conector USB Tipo C.
-        </p>
-    </div>
+    <section id="configuracion">
+        <h2>Instrucciones de Configuración</h2>
+        <ol>
+            <li><strong>Preparar el Robot Graficador:</strong>
+                <ul>
+                    <li>Asegúrese de que las baterías estén completamente cargadas.</li>
+                    <li>Verifique que las ruedas estén correctamente ajustadas.</li>
+                    <li>Coloque el robot en una superficie lisa y marcada con puntos de referencia (como baldosas).</li>
+                </ul>
+            </li>
+            <li><strong>Configurar la Interfaz Interactiva:</strong>
+                <ul>
+                    <li>Acceda al software mediante un navegador web compatible.</li>
+                    <li>Conecte el ESP32 del robot al software utilizando la red Wi-Fi configurada.</li>
+                    <li>Ingrese al menú principal y seleccione la opción "Configurar Robot".</li>
+                </ul>
+            </li>
+            <li><strong>Sincronizar el Sistema:</strong>
+                <ul>
+                    <li>Una vez conectado, la interfaz mostrará un mensaje de "Robot Conectado".</li>
+                    <li>Realice una prueba de movimiento desde la opción "Prueba de Movimiento" para confirmar la conexión.</li>
+                </ul>
+            </li>
+        </ol>
+    </section>
 
-    <div class="block">
-        <h3>Instrucciones de Uso</h3>
+    <section id="uso">
+        <h2>Uso del Sistema</h2>
+        <ol>
+            <li><strong>Introducir Vectores:</strong>
+                <ul>
+                    <li>Desde la interfaz, seleccione la opción "Ingresar Vectores".</li>
+                    <li>Ingrese las coordenadas X e Y del vector deseado.</li>
+                    <li>Realice operaciones como:
+                        <ul>
+                            <li>Suma de vectores.</li>
+                            <li>Multiplicación por escalares.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><strong>Graficar Vectores:</strong>
+                <ul>
+                    <li>Haga clic en "Graficar" para visualizar el vector ingresado en el plano cartesiano.</li>
+                    <li>El robot se moverá en la trayectoria correspondiente al vector.</li>
+                </ul>
+            </li>
+            <li><strong>Operaciones Competitivas:</strong>
+                <ul>
+                    <li>Forme equipos y compita para completar operaciones vectoriales en el menor tiempo posible.</li>
+                    <li>Utilice el robot para ejecutar operaciones como suma y resta de vectores.</li>
+                    <li>Registre los tiempos y resultados en la interfaz.</li>
+                </ul>
+            </li>
+        </ol>
+    </section>
+
+    <section id="mantenimiento">
+        <h2>Mantenimiento del Sistema</h2>
         <ul>
-            <li>Ubicar KINEMATIC VECTOR en un lugar adecuado, preferiblemente alto.</li>
-            <li>Descarga la app Bluetooth RC Control en la Play Store.</li>
-            <li>Conectar el Bluetooth del móvil e ingresar a la app descargada.</li>
-            <li>Buscar el menú de opciones de la app, seleccionar la opción “Connect to Car”.</li>
-            <li>Presionar el interruptor de encendido.</li>
-            <li>Conectar el cargador por máximo 3 horas.</li>
-            <li>Duración del cargador: 24 horas.</li>
+            <li><strong>Robot Graficador:</strong>
+                <ul>
+                    <li>Limpieza: Asegúrese de limpiar las ruedas y la estructura después de cada sesión para evitar acumulación de suciedad.</li>
+                    <li>Cuidado de los Motores: Evite exceder el voltaje nominal de 6V para prevenir daños en los motores.</li>
+                </ul>
+            </li>
+            <li><strong>Interfaz Interactiva:</strong>
+                <ul>
+                    <li>Mantenga actualizado el software para garantizar un rendimiento óptimo.</li>
+                    <li>Verifique periódicamente la conexión Wi-Fi del ESP32.</li>
+                </ul>
+            </li>
+            <li><strong>Reemplazo de Componentes:</strong>
+                <ul>
+                    <li>Reemplace las baterías cuando su capacidad disminuya notablemente.</li>
+                    <li>En caso de daño en las piezas impresas en 3D, use los planos proporcionados para reimprimirlas.</li>
+                </ul>
+            </li>
         </ul>
-    </div>
+    </section>
 
-    <div class="block">
-        <h3>Mantenimiento y Cuidado</h3>
+    <section id="problemas">
+        <h2>Resolución de Problemas</h2>
         <ul>
-            <li>No exceder el peso límite de los carros (1 lb).</li>
-            <li>Guardar carros acostados, no parados.</li>
-            <li>Evitar destapar el dispositivo si no hay conocimiento sobre reparación.</li>
-            <li>No exigir a las baterías que se agoten a su tope mínimo.</li>
-            <li>Evitar colocarlo sobre superficies con alta presencia de mugre, pelusa u otros materiales finos que puedan infiltrarse por las llantas.</li>
-            <li>Mantener una distancia razonable entre el control remoto y otros dispositivos electrónicos que utilicen Bluetooth.</li>
+            <li><strong>Problema:</strong> El robot no se conecta al software<br>
+                <strong>Solución:</strong> Verifique que el ESP32 esté encendido y dentro del rango de la red Wi-Fi.
+            </li>
+            <li><strong>Problema:</strong> Movimiento irregular del robot<br>
+                <strong>Solución:</strong> Revise las ruedas y asegúrese de que no haya objetos obstruyendo el movimiento.
+            </li>
+            <li><strong>Problema:</strong> El gráfico no corresponde al vector<br>
+                <strong>Solución:</strong> Confirme que las coordenadas ingresadas sean correctas en la interfaz.
+            </li>
         </ul>
-    </div>
-</section>
+    </section>
 
-<section class="link-section">
-    <p>
-        <a href="file:///C:/Users/jvall/OneDrive/Escritorio/interfz.html" target="_blank">Enlace a la página que grafica vectores 2D</a>
-    </p>
-    <p class="note">'interfz.html'.</p>
-</section>
-
+    <footer>
+        <p>¡Gracias por usar el Sistema Interactivo para el Aprendizaje de Vectores!</p>
+    </footer>
 </body>
 </html>
+
